@@ -24,8 +24,8 @@ export const login = async ({ email, password }) => {
   return token;
 };
 
-export const requestPasswordReset = async (username) => {
-  const user = await User.findOne({ username });
+export const requestPasswordReset = async (email) => {
+  const user = await User.findOne({ email });
   if (!user) throw new Error('User not found');
 
   // Generate reset token

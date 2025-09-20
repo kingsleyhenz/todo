@@ -2,11 +2,11 @@ import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import User from '../models/user.js';
 
-export const register = async ({ username, password }) => {
-  let user = await User.findOne({ username });
+export const register = async ({ email, username, password }) => {
+  let user = await User.findOne({ email });
   if (user) throw new Error('User already exists');
 
-  user = new User({ email, name, password });
+  user = new User({ email, username, password });
   await user.save();
 
   const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
